@@ -1,31 +1,41 @@
 if SERVER then util.AddNetworkString("maestro_friends") end
-local currentqueryee
+local activequeries = {}
 maestro.command("friends", {"player:target"}, function(caller, targets)
     if #targets == 0 then
         return true, "Query matched no players."
     elseif #targets > 1 then
         return true, "Query matched more than one player."
     end
-    currentqueryee = caller
-    maestro.chat(caller, Color(255, 255, 255), "Connected friends of ", targets[1], ":")
+    activequeries[targets[1]:SteamID64()] = caller:SteamID64()
     net.Start("maestro_friends")
-        net.WriteEntity(targets[1])
-    net.SendOmit(targets[1])
+    net.Send(targets[1])
 end, [[
 Prints out a listing of the target's currently connected friends.]])
 net.Receive("maestro_friends", function(len, ply)
     if CLIENT then
-        local s = net.ReadEntity():GetFriendStatus()
-        if s ~= "none" then
-            net.Start("maestro_friends")
-                net.WriteString(s)
-            net.SendToServer()
+        local friends = {}
+        for k, v in ipairs(player.GetAll()) do
+            if v:GetFriendStatus() == "friend" then
+                table.insert(friends, v:Nick())
+            end
         end
+        net.Start("maestro_friends")
+        net.WriteString(util.TableToJSON(friends))
+        net.SendToServer()
     end
     if SERVER then
-        local s = net.ReadString()
-        if s == "friend" or s == "blocked" or s == "requested" then
-            maestro.chat(currentqueryee, "\t", ply, ": ", s)
+        if activequeries[ply:SteamID64()] then
+            local caller = player.GetBySteamID64(activequeries[ply:SteamID64()])
+            local friends = util.JSONToTable(net.ReadString())
+            caller:PrintMessage(HUD_PRINTTALK, "Connected friends of " .. ply:Nick() .. ":")
+            if (not friends) or #friends < 1 then
+                caller:PrintMessage(HUD_PRINTTALK, "-\t" .. "None :'(")
+            else
+                for k, v in ipairs(friends) do
+                    caller:PrintMessage(HUD_PRINTTALK, "-\t" .. v)
+                end
+            end
+            activequeries[ply:SteamID64()] = nil
         end
     end
 end)
