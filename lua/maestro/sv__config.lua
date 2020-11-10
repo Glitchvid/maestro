@@ -17,6 +17,7 @@ tables.notes = "maestro_notes"
 tables.perms = "maestro_perms"
 tables.ranks = "maestro_ranks"
 tables.users = "maestro_users"
+tables.joins = "maestro_joins"
 
 
 config.tables = tables
