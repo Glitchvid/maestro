@@ -1,10 +1,10 @@
 local version = "2.4.2"
 maestro = {}
-print("\201\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\187")
-print("\186 Maestro " .. version .. string.rep(" ", 25 - #version) .. "\186")
-print("\186     (it's pronounced \"my strow\") \186")
-print("\186 (c) 2015 Ott(STEAM_0:0:36527860) \186")
-print("\199\196\196\196\196\196\196\196\196\196\196\196\196\196\196\196\196\196\196\196\196\196\196\196\196\196\196\196\196\196\196\196\196\196\196\182")
+print("╔══════════════════════════════════╗")
+print("╟ Maestro " .. version .. string.rep(" ", 25 - #version) .. "╢")
+print("╟     (it's pronounced \"my strow\") ╢")
+print("╟ (c) 2015 Ott(STEAM_0:0:36527860) ╢")
+print("╠══════════════════════════════════╣")
 hook.Call("maestro_preload")
 local files, folders = file.Find("maestro/*.lua", "LUA")
 table.sort(files, function(a, b)
@@ -16,7 +16,7 @@ table.sort(files, function(a, b)
 	return a < b
 end)
 for k, v in pairs(files) do
-	print("\199\196" .. v .. string.rep(" ", 33 - #v) .. "\186")
+	print("║ " .. v .. string.rep(" ", 33 - #v) .. "║")
 	if string.sub(v, 1, 3) == "cl_" then
 		if SERVER then
 			AddCSLuaFile("maestro/" .. v)
@@ -35,9 +35,8 @@ for k, v in pairs(files) do
 		end
 	end
 end
-print("\200\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\188")
+print("╟──────────────────────────────────╢")
 hook.Add("maestro_pluginload", "maestro", function()
-	print("\201\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\187")
 	hook.Call("maestro_prepluginload")
 	local files, folders = file.Find("maestro/plugins/*.lua", "LUA")
 	table.sort(files, function(a, b)
@@ -49,7 +48,7 @@ hook.Add("maestro_pluginload", "maestro", function()
 		return a < b
 	end)
 	for k, v in pairs(files) do
-		print("\199\196" .. v .. string.rep(" ", 33 - #v) .. "\186")
+		print("║ " .. v .. string.rep(" ", 33 - #v) .. "║")
 		if string.sub(v, 1, 3) == "cl_" then
 			if SERVER then
 				AddCSLuaFile("maestro/plugins/" .. v)
@@ -69,7 +68,7 @@ hook.Add("maestro_pluginload", "maestro", function()
 		end
 	end
 	hook.Call("maestro_postpluginload")
-	print("\200\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\188")
+	print("╚══════════════════════════════════╝")
 end)
 hook.Call("maestro_postload")
 if CLIENT then
@@ -115,11 +114,11 @@ fixes for bugs and errors.
 			end
 			if msg then
 				msg = string.gsub(msg, "%%+", ver)
-				print("\201\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\187")
+				print("╔══════════════════════════════════╗")
 				for w in string.gmatch(msg, "[^\n]+") do
 					print("\186 " .. w .. string.rep(" ", 32 - #w) .. " \186")
 				end
-				print("\200\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\205\188")
+				print("╚══════════════════════════════════╝")
 			end
 		end)
 	end)
