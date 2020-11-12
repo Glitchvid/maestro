@@ -118,7 +118,7 @@ function maestro.autocomplete(base, str)
 					end
 				end
 			elseif types[#params] then
-				table.insert(t, base .. cmd .. cnct)
+				table.insert(t, base .. cmd .. cnct .. "<" .. types[#params] .. ">")
 			else
 				table.insert(t, base .. cmd .. cnct)
 			end
