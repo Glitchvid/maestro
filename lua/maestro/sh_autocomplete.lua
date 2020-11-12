@@ -51,7 +51,7 @@ function maestro.autocomplete(base, str)
 			local cnct = table.concat(args, " ", 2, #args - 1)
 			cnct = " " .. cnct .. " "
 			cnct = cnct:gsub("%s+", " ")
-			local typ = string.match(types[#params] or types[#types], "[^:]+")
+			local typ = string.match(tostring(types[#params] or types[#types]), "[^:]+")
 			if typ == "player" then
 				local plys = maestro.target(params[#params], LocalPlayer(), cmd)
 				for i = 1, #plys do
@@ -118,7 +118,9 @@ function maestro.autocomplete(base, str)
 					end
 				end
 			elseif types[#params] then
-				table.insert(t, base .. cmd .. cnct .. "<" .. types[#params] .. ">")
+				table.insert(t, base .. cmd .. cnct)
+			else
+				table.insert(t, base .. cmd .. cnct)
 			end
 		end
 	end

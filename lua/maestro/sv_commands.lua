@@ -120,7 +120,7 @@ function maestro.runcmd(silent, cmd, args, ply)
 			end
 			local desc = string.match(maestro.commands[cmd].args[endarg] or "", "[^:]+$")
 			if not string.find(desc or "", "multiple") then
-				args[endarg] = args[endarg] .. " " .. args[i]
+				args[endarg] = args[endarg] or "" .. " " .. args[i]
 				args[i] = nil
 			end
 		end
@@ -166,7 +166,7 @@ function maestro.runcmd(silent, cmd, args, ply)
 		handleError(ply, cmd, msg)
 	elseif msg then
 		local t = string.Explode("%%[%d%%]", msg, true)
-		local ret = {ply or "(Console)", " "}
+		local ret = {ply and "Player" or "(Console)", " "}
 		local i = 1
 		local max = 1
 		for m in string.gmatch(msg, "%%%d") do --tally up
@@ -224,9 +224,13 @@ function maestro.runcmd(silent, cmd, args, ply)
 					plys[#plys + 1] = ply
 				end
 			end
+			plys = {ply}
+			ranks = {}
+			ret[1] = "You"
+			-- maestro.chat(plys,unpack(ret))
 			maestro.chat(plys, maestro.colors.grey, "silent ", maestro.colors.white, unpack(ret))
 		else
-			maestro.chat(nil, unpack(ret))
+			maestro.chat(nil, maestro.colors.blue, unpack(ret))
 		end
 	end
 end
