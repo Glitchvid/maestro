@@ -23,9 +23,9 @@ maestro.command("gimp", {"player:target", "boolean:state(optional)"}, function(c
 end, [[
 Gimps a player so that anything they say is replaced by a gimp line.]])
 maestro.command("gimps", {}, function(caller)
-    maestro.chat(caller, Color(255, 255, 255), "Gimps:")
+    maestro.chat(caller, maestro.colors.white, "Gimps:")
     for i = 1, #gimps do
-        maestro.chat(caller, Color(255, 255, 255), i, ". ", gimps[i])
+        maestro.chat(caller, maestro.colors.white, i, ". ", gimps[i])
     end
 end, [[
 Lists available gimp lines.]])

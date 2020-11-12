@@ -1,14 +1,14 @@
 local notes = {}
 
 local function donotes(caller, id, nick)
-    maestro.chat(caller, Color(255, 255, 255), "Notes on ", maestro.blue, nick, Color(255, 255, 255), "(", maestro.blue, util.SteamIDFrom64(id), Color(255, 255, 255), "):")
+    maestro.chat(caller, maestro.colors.white, "Notes on ", maestro.colors.blue, nick, maestro.colors.white, "(", maestro.colors.blue, util.SteamIDFrom64(id), maestro.colors.white, "):")
     local q = mysql:Select(maestro.config.tables.notes)
         q:Where("steamid", id)
         q:Callback(function(res, status)
             if type(res) == "table" then
                 for i = 1, #res do
                     local note = res[i]
-                    maestro.chat(caller, Color(255, 255, 255), "\t", os.date("%x - ", note.when), "#", note.id, ", ", note.admin, "(", util.SteamIDFrom64(note.adminid), "): ", Color(255, 255, 255), note.note)
+                    maestro.chat(caller, maestro.colors.white, "\t", os.date("%x - ", note.when), "#", note.id, ", ", note.admin, "(", util.SteamIDFrom64(note.adminid), "): ", maestro.colors.white, note.note)
                 end
             end
         end)
@@ -24,9 +24,9 @@ local function noterm(id, num, caller)
                     q:Where("steamid", id)
                     q:Where("id", num)
                 q:Execute()
-                maestro.chat(caller, Color(255, 255, 255), "Note removed.")
+                maestro.chat(caller, maestro.colors.white, "Note removed.")
             else
-                maestro.chat(caller, maestro.orange, "noteremove: No note for this player with this id.")
+                maestro.chat(caller, maestro.colors.orange, "noteremove: No note for this player with this id.")
             end
         end)
     q:Execute()

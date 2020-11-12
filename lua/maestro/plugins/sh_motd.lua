@@ -18,7 +18,7 @@ maestro.command("motd", {"player:target(optional"}, function(caller, targets)
             net.WriteString(motd)
         net.Send(targets or caller)
     else
-        maestro.chat(false, Color(255, 255, 255), "The motd is set to: ", maestro.blue, motd)
+        maestro.chat(false, maestro.colors.white, "The motd is set to: ", maestro.colors.blue, motd)
     end
 end, [[
 Opens the MOTD.

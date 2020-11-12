@@ -5,7 +5,7 @@ local config = maestro.config
 hook.Add("maestro_postload", "database", function()
 	mysql:SetModule(config.module)
 	function mysql:OnConnected()
-		MsgC(Color(25, 235, 25), "[mysql] Connected to the database!\n")
+		MsgC(maestro.colors.green, "[mysql] Connected to the database!\n")
 		hook.Call("DatabaseConnected", nil)
 		hook.Call("maestro_pluginload")
 	end

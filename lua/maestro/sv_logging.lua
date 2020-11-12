@@ -3,7 +3,7 @@ local function plystr(ply)
     return fmt("%s(%s)", ply:Nick(), ply:SteamID())
 end
 function maestro.serverlog(txt, col)
-    col = col or Color(255, 255, 255)
+    col = col or maestro.colors.white
     local final = os.date("[%H:%M] ") .. txt
     MsgC(col, final, "\n")
     for name, rank in pairs(maestro.ranks) do

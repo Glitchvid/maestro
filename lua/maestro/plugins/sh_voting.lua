@@ -4,9 +4,9 @@ maestro.command("vote", {"title", "options:multiple"}, function(caller, title, .
 	local args = {...}
 	maestro.vote(title, args, function(option, voted, total)
 		if option then
-			maestro.chat(nil, Color(255, 255, 255), "Option \"", option, "\" has won. (", voted, "/", total, ")")
+			maestro.chat(nil, maestro.colors.white, "Option \"", option, "\" has won. (", voted, "/", total, ")")
 		else
-			maestro.chat(nil, Color(255, 255, 255), "No options have won.")
+			maestro.chat(nil, maestro.colors.white, "No options have won.")
 		end
 	end)
 	return false, "started a vote \"%1\""
@@ -23,15 +23,15 @@ maestro.command("votekick", {"player:target", "reason"}, function(caller, target
 	end
 	maestro.vote("Kick " .. targets[1]:Nick() .. " for " .. (reason or "no reason") .. "?", {"Yes, kick this player.", "No, do not kick this player."}, function(option, voted, total)
 		if option then
-			maestro.chat(nil, Color(255, 255, 255), "Option \"", option, "\" has won. (", voted, "/", total, ")")
+			maestro.chat(nil, maestro.colors.white, "Option \"", option, "\" has won. (", voted, "/", total, ")")
 			if option == "Yes, kick this player." then
-				maestro.chat(nil, Color(255, 255, 255), "Player ", targets[1], " will be kicked.")
+				maestro.chat(nil, maestro.colors.white, "Player ", targets[1], " will be kicked.")
 				targets[1]:Kick("You have been voted off")
 			else
-				maestro.chat(nil, Color(255, 255, 255), "No action will be taken.")
+				maestro.chat(nil, maestro.colors.white, "No action will be taken.")
 			end
 		else
-			maestro.chat(nil, Color(255, 255, 255), "No options have won.")
+			maestro.chat(nil, maestro.colors.white, "No options have won.")
 		end
 	end)
 	if reason then
@@ -51,15 +51,15 @@ maestro.command("voteban", {"player:target", "time", "reason"}, function(caller,
 	end
 	maestro.vote("Ban " .. targets[1]:Nick() .. " for " .. maestro.time(time) .. "? (" .. (reason or "no reason") .. ")", {"Yes, ban this player.", "No, do not ban this player."}, function(option, voted, total)
 		if option then
-			maestro.chat(nil, Color(255, 255, 255), "Option \"", option, "\" has won. (", voted, "/", total, ")")
+			maestro.chat(nil, maestro.colors.white, "Option \"", option, "\" has won. (", voted, "/", total, ")")
 			if option == "Yes, ban this player." then
-				maestro.chat(nil, Color(255, 255, 255), "Player ", targets[1], " will be banned.")
+				maestro.chat(nil, maestro.colors.white, "Player ", targets[1], " will be banned.")
 				maestro.ban(targets[1], time, "Voted: " .. (reason or "no reason"))
 			else
-				maestro.chat(nil, Color(255, 255, 255), "No action will be taken.")
+				maestro.chat(nil, maestro.colors.white, "No action will be taken.")
 			end
 		else
-			maestro.chat(nil, Color(255, 255, 255), "No options have won.")
+			maestro.chat(nil, maestro.colors.white, "No options have won.")
 		end
 	end)
 	if reason then
@@ -71,15 +71,15 @@ Starts a vote to ban the target for the specified time and an optional reason.]]
 maestro.command("voteclean", {}, function(caller)
 	maestro.vote("Clean up the map?", {"Yes", "No"}, function(option, voted, total)
 		if option and option == "Yes" then
-			maestro.chat(nil, Color(255, 255, 255), "The map will be cleaned in 30 seconds. (", voted, "/", total, ")")
+			maestro.chat(nil, maestro.colors.white, "The map will be cleaned in 30 seconds. (", voted, "/", total, ")")
 			maestro.announce("The map will be cleaned up in 30 seconds.", "Map Clean Up", "warning")
 			timer.Simple(15, function()
-				maestro.chat(nil, Color(255, 255, 255), "The map will be cleaned in 15 seconds.")
+				maestro.chat(nil, maestro.colors.white, "The map will be cleaned in 15 seconds.")
 				timer.Simple(10, function()
-					maestro.chat(nil, Color(255, 255, 255), "The map will be cleaned in 5 seconds.")
+					maestro.chat(nil, maestro.colors.white, "The map will be cleaned in 5 seconds.")
 					for i = 1, 4 do
 						timer.Simple(i, function()
-							maestro.chat(nil, Color(255, 255, 255), "The map will be cleaned in ", 5 - i, " seconds.")
+							maestro.chat(nil, maestro.colors.white, "The map will be cleaned in ", 5 - i, " seconds.")
 						end)
 						timer.Simple(5, function()
 							game.CleanUpMap()
@@ -88,7 +88,7 @@ maestro.command("voteclean", {}, function(caller)
 				end)
 			end)
 		else
-			maestro.chat(nil, Color(255, 255, 255), "The map will not be cleaned.")
+			maestro.chat(nil, maestro.colors.white, "The map will not be cleaned.")
 		end
 	end)
 	return false, "started a vote to clean the map"

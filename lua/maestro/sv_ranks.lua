@@ -2,7 +2,7 @@ maestro.ranks = {}
 util.AddNetworkString("maestro_ranks")
 
 function maestro.rankadd(name, inherits, perms)
-	local r = {perms = {}, inherits = inherits, cantarget = "<^", canrank = "!>^", flags = {}, color = Color(255, 255, 255)}
+	local r = {perms = {}, inherits = inherits, cantarget = "<^", canrank = "!>^", flags = {}, color = maestro.colors.white}
 	maestro.ranks[name] = r
 	setmetatable(r.perms, {__index = function(tab, key)
 		if name == "root" then return true end

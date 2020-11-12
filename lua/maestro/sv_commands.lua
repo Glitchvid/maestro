@@ -58,9 +58,9 @@ end
 
 local function handleError(ply, cmd, msg)
 	if IsValid(ply) then
-		maestro.chat(ply, maestro.orange,  cmd .. ": " .. msg)
+		maestro.chat(ply, maestro.colors.orange,  cmd .. ": " .. msg)
 	else
-		MsgC(maestro.orange, cmd .. ": " .. msg .. "\n")
+		MsgC(maestro.colors.orange, cmd .. ": " .. msg .. "\n")
 	end
 end
 
@@ -90,16 +90,16 @@ local function handleMultiple(a, ret, cmd, num)
 			end
 		end
 	elseif t == "time" then
-		table.insert(ret, maestro.blue)
+		table.insert(ret, maestro.colors.blue)
 		table.insert(ret, maestro.time(a))
 	elseif t == "steamid" then
 		table.insert(ret, "(")
-		table.insert(ret, maestro.blue)
+		table.insert(ret, maestro.colors.blue)
 		table.insert(ret, a)
-		table.insert(ret, Color(255, 255, 255))
+		table.insert(ret, maestro.colors.white)
 		table.insert(ret, ")")
 	else
-		table.insert(ret, maestro.blue)
+		table.insert(ret, maestro.colors.blue)
 		table.insert(ret, tostring(a))
 	end
 end
@@ -176,17 +176,17 @@ function maestro.runcmd(silent, cmd, args, ply)
 		max = max + 1
 		for m in string.gmatch(msg, "%%[%d%%]") do
 			local num = tonumber(m:sub(2, 2))
-			table.insert(ret, Color(255, 255, 255))
+			table.insert(ret, maestro.colors.white)
 			table.insert(ret, t[i])
 			if num then --normal argument
 				local a = cmdret[num] or args[num]
 				handleMultiple(a, ret, cmd, num)
 			else --it's a vararg
-				table.insert(ret, maestro.orange)
+				table.insert(ret, maestro.colors.orange)
 				table.insert(ret, "[")
 				for i = max, #args do
 					local a = cmdret[i] or args[i]
-					table.insert(ret, Color(255, 255, 255))
+					table.insert(ret, maestro.colors.white)
 					if i ~= max and i == #args then
 						if i - max > 2 then
 							table.insert(ret, ", and ")
@@ -198,13 +198,13 @@ function maestro.runcmd(silent, cmd, args, ply)
 					end
 					handleMultiple(a, ret, cmd, num)
 				end
-				table.insert(ret, maestro.orange)
+				table.insert(ret, maestro.colors.orange)
 				table.insert(ret, "]")
 			end
 			i = i + 1
 		end
 		if #t[#t] ~= 0 then
-			table.insert(ret, Color(255, 255, 255))
+			table.insert(ret, maestro.colors.white)
 			table.insert(ret, t[#t])
 		end
 
@@ -224,7 +224,7 @@ function maestro.runcmd(silent, cmd, args, ply)
 					plys[#plys + 1] = ply
 				end
 			end
-			maestro.chat(plys, Color(64, 64, 64), "silent ", Color(255, 255, 255), unpack(ret))
+			maestro.chat(plys, maestro.colors.grey, "silent ", maestro.colors.white, unpack(ret))
 		else
 			maestro.chat(nil, unpack(ret))
 		end
@@ -243,10 +243,10 @@ net.Receive("maestro_cmd", function(len, ply)
 			local silent = net.ReadBool()
 			maestro.runcmd(silent, cmd, args, ply)
 		else
-			maestro.chat(ply, maestro.orange,  cmd .. ": Insufficient permissions!")
+			maestro.chat(ply, maestro.colors.orange,  cmd .. ": Insufficient permissions!")
 		end
 	else
-		maestro.chat(ply, maestro.orange, "Unrecognized command: " .. cmd)
+		maestro.chat(ply, maestro.colors.orange, "Unrecognized command: " .. cmd)
 	end
 end)
 
@@ -307,7 +307,7 @@ maestro.hook("PlayerSay", "maestro_command", function(ply, txt, team)
 			if maestro.rankget(maestro.userrank(ply)).perms[cmd] then
 				maestro.runcmd(team, cmd, args, ply)
 			else
-				maestro.chat(ply, maestro.orange, cmd, ": Insufficient permissions!")
+				maestro.chat(ply, maestro.colors.orange, cmd, ": Insufficient permissions!")
 			end
 			return ""
 		end

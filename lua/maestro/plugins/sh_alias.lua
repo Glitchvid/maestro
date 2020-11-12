@@ -42,7 +42,7 @@ if CLIENT and not atlaschat then
         local args = {...}
         for k, v in ipairs(args) do
             if type(v) == "Player" then
-                args[k] = Color(255, 255, 255)
+                args[k] = maestro.colors.white
                 table.insert(args, k, v:Nick())
                 table.insert(args, k, team.GetColor(v:Team()))
             end

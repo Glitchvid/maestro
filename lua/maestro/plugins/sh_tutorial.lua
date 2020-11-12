@@ -5,9 +5,9 @@ maestro.command("tutorial", {"number:page(optional)"}, function(caller, page)
         return true, "Invalid page."
     end
     if not caller then
-        MsgC(Color(255, 255, 255), tutorial[page])
+        MsgC(maestro.colors.white, tutorial[page])
     else
-        maestro.chat(caller, Color(255, 255, 255), "Page ", page, " of the tutorial has been printed to your console.")
+        maestro.chat(caller, maestro.colors.white, "Page ", page, " of the tutorial has been printed to your console.")
         net.Start("maestro_tutorial")
             net.WriteUInt(page or 0, 8)
         net.Send(caller)
@@ -17,7 +17,7 @@ Displays the tutorial.]])
 if SERVER then util.AddNetworkString("maestro_tutorial") end
 net.Receive("maestro_tutorial", function()
     local page = net.ReadUInt(8)
-    MsgC(Color(255, 255, 255), tutorial[page][2])
+    MsgC(maestro.colors.white, tutorial[page][2])
 end)
 
 tutorial[0] = {"Table Of Contents", [[

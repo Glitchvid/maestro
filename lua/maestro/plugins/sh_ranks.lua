@@ -135,7 +135,7 @@ maestro.command("rankcolor", {"rank", "number:r", "number:g", "number:b"}, funct
 end)
 maestro.command("ranks", {}, function(caller)
 	if caller then
-		maestro.chat(caller, Color(255, 255, 255), "Available ranks:")
+		maestro.chat(caller, maestro.colors.white, "Available ranks:")
 	else
 		print("Available ranks:")
 	end

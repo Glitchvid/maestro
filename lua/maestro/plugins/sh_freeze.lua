@@ -35,7 +35,7 @@ end, [[
 Freezes a player.]])
 maestro.hook("CanPlayerSuicide", "freeze", function(ply)
     if froze[ply] then
-        maestro.chat(ply, maestro.orange, "You can't suicide right now!")
+        maestro.chat(ply, maestro.colors.orange, "You can't suicide right now!")
         return false
     end
 end)

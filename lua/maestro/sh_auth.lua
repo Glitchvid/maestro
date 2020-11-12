@@ -51,7 +51,7 @@ end
 maestro.hook("PlayerAuthed", "maestro_PlayerAuthed", function(ply, steam)
 	steam = util.SteamIDTo64(steam)
 	if ply.IsFullyAuthenticated and not ply:IsFullyAuthenticated() then
-		maestro.chat(ply, maestro.orange, "Hey, your SteamID isn't validated. We're going to check again in 15 seconds and then kick you if you aren't validated by then.")
+		maestro.chat(ply, maestro.colors.orange, "Hey, your SteamID isn't validated. We're going to check again in 15 seconds and then kick you if you aren't validated by then.")
 		timer.Simple(15, function()
 			if ply.IsFullyAuthenticated and not ply:IsFullyAuthenticated() then
 				ply:Kick("SteamID not validated, try again later.")

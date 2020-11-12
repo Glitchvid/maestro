@@ -227,7 +227,7 @@ Returns the targets to their positions before any teleport commands.]])
 maestro.command("sethome", {}, function(caller)
 	if not caller then return true, "Command cannot be run from the server console." end
 	caller.maestro_home = caller:GetPos()
-	maestro.chat(caller, Color(255, 255, 255), "Home set.")
+	maestro.chat(caller, maestro.colors.white, "Home set.")
 end, [[
 Sets your home position.]])
 maestro.command("home", {}, function(caller)

@@ -14,7 +14,7 @@ maestro.command("msg", {"player:target", "message"}, function(caller, targets, m
 	table.sort(targets, function(a, b)
 		return a:Nick() < b:Nick()
 	end)
-	local ret = {Color(255, 255, 255), caller, " to "}
+	local ret = {maestro.colors.white, caller, " to "}
 	for j = 1, #targets do
 		if targets[j] == caller and #targets > 1 then continue end
 		if j == 1 then
@@ -52,7 +52,7 @@ maestro.command("admin", {"text"}, function(caller, text)
 			plys[#plys + 1] = ply
 		end
 	end
-	maestro.chat(plys, caller, Color(255, 255, 255), " to ", Color(0, 255, 0), "admins", Color(255, 255, 255), ": ", text)
+	maestro.chat(plys, caller, maestro.colors.white, " to ",maestro.colors.green, "admins", maestro.colors.white, ": ", text)
 end, [[
 Sends a message to any people in ranks flagged as admin.]])
 maestro.hook("PlayerSay", "admin", function(ply, text)

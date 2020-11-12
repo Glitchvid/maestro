@@ -46,13 +46,13 @@ maestro.command("rtv", {}, function(caller)
 				nominated = {}
 				rtv = {}
 				if option and file.Exists("maps/" .. option .. ".bsp", "MOD") then
-					maestro.chat(nil, Color(255, 255, 255), "Option \"", option, "\" has won. (", voted, "/", total, ")")
-					maestro.chat(nil, Color(255, 255, 255), "Map change in 3 seconds.")
+					maestro.chat(nil, maestro.colors.white, "Option \"", option, "\" has won. (", voted, "/", total, ")")
+					maestro.chat(nil, maestro.colors.white, "Map change in 3 seconds.")
 					timer.Simple(3, function()
 						RunConsoleCommand("changelevel", option)
 					end)
 				else
-					maestro.chat(nil, Color(255, 255, 255), "No options have won.")
+					maestro.chat(nil, maestro.colors.white, "No options have won.")
 				end
 			end)
 		end
@@ -75,13 +75,13 @@ maestro.command("rtv", {}, function(caller)
 			nominated = {}
 			rtv = {}
 			if option and file.Exists("maps/" .. option .. ".bsp", "MOD") then
-				maestro.chat(nil, Color(255, 255, 255), "Option \"", option, "\" has won. (", voted, "/", total, ")")
-				maestro.chat(nil, Color(255, 255, 255), "Map change in 3 seconds.")
+				maestro.chat(nil, maestro.colors.white, "Option \"", option, "\" has won. (", voted, "/", total, ")")
+				maestro.chat(nil, maestro.colors.white, "Map change in 3 seconds.")
 				timer.Simple(3, function()
 					RunConsoleCommand("changelevel", option)
 				end)
 			else
-				maestro.chat(nil, Color(255, 255, 255), "No options have won.")
+				maestro.chat(nil, maestro.colors.white, "No options have won.")
 			end
 		end)
 	end

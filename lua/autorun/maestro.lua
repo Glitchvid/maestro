@@ -123,6 +123,3 @@ fixes for bugs and errors.
 		end)
 	end)
 end)
-
-maestro.orange = HSVToColor(33, 0.9, 1)
-maestro.blue = HSVToColor(200, 0.9, 1)

@@ -104,19 +104,19 @@ Removes the restriction status from a rank's item. The rank's item availibility 
 
 maestro.hook("CanTool", "items", function(ply, tr, item)
     if maestro.rankget(maestro.userrank(ply)).items and maestro.rankget(maestro.userrank(ply)).items[item] == false then
-        maestro.chat(ply, maestro.orange, "This tool is restricted from your rank!")
+        maestro.chat(ply, maestro.colors.orange, "This tool is restricted from your rank!")
         return false
     end
 end)
 maestro.hook("PlayerCanPickupWeapon", "items", function(ply, item)
     if maestro.rankget(maestro.userrank(ply)).items and maestro.rankget(maestro.userrank(ply)).items[item:GetClass()] == false then
-        maestro.chat(ply, maestro.orange, "This weapon is restricted from your rank!")
+        maestro.chat(ply, maestro.colors.orange, "This weapon is restricted from your rank!")
         return false
     end
 end)
 maestro.hook("PlayerCanPickupItem", "items", function(ply, item)
     if maestro.rankget(maestro.userrank(ply)).items and maestro.rankget(maestro.userrank(ply)).items[item:GetClass()] == false then
-        maestro.chat(ply, maestro.orange, "This item is restricted from your rank!")
+        maestro.chat(ply, maestro.colors.orange, "This item is restricted from your rank!")
         return false
     end
 end)

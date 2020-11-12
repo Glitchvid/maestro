@@ -21,9 +21,9 @@ maestro.command("advert", {"time", "r:number", "g:number", "b:number", "text"}, 
 end, [[
 Plays text back at an interval.]])
 maestro.command("adverts", {}, function(caller)
-    maestro.chat(caller, Color(255, 255, 255), "Adverts:")
+    maestro.chat(caller, maestro.colors.white, "Adverts:")
     for i = 1, #adverts do
-        maestro.chat(caller, Color(255, 255, 255), i, ". ", adverts[i].color, adverts[i].text)
+        maestro.chat(caller, maestro.colors.white, i, ". ", adverts[i].color, adverts[i].text)
     end
 end, [[
 Prints out a list of adverts.]])
@@ -31,7 +31,7 @@ maestro.command("advertremove", {"id:number"}, function(caller, id)
     id = tonumber(id)
     if not adverts[id] then return true, "Advert not found." end
     local a = table.remove(adverts, id)
-    maestro.chat(caller, Color(255, 255, 255), "Advert removed. Note that all subsequent adverts will be shifted down, check the list before removing again.")
+    maestro.chat(caller, maestro.colors.white, "Advert removed. Note that all subsequent adverts will be shifted down, check the list before removing again.")
     timer.Remove("maestro_advert_" .. a.text)
     maestro.save("adverts", adverts)
     return false, "removed advert %1", a.text

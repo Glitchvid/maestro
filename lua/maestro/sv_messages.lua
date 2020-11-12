@@ -23,28 +23,28 @@ maestro.hook("CheckPassword", "maestro_messages", function(id64, ip, sv, cl, nam
 		return
 	end
 	if sv ~= "" and sv ~= cl then
-		maestro.chat(false, Color(255, 255, 255), "Player ", Color(78, 196, 255), name, Color(255, 255, 255), " (", Color(78, 196, 255), util.SteamIDFrom64(id64), Color(255, 255, 255), ") tried to connect to the server with incorrect password \"", cl, "\".")
+		maestro.chat(false, maestro.colors.white, "Player ", maestro.colors.blue, name, maestro.colors.white, " (", maestro.colors.blue, util.SteamIDFrom64(id64), maestro.colors.white, ") tried to connect to the server with incorrect password \"", cl, "\".")
 	else
-		maestro.chat(nil, Color(255, 255, 255), "Player ", Color(78, 196, 255), name, Color(255, 255, 255), " (", Color(78, 196, 255), util.SteamIDFrom64(id64), Color(255, 255, 255), ") has connected to the server.")
+		maestro.chat(nil, maestro.colors.white, "Player ", maestro.colors.blue, name, maestro.colors.white, " (", maestro.colors.blue, util.SteamIDFrom64(id64), maestro.colors.white, ") has connected to the server.")
 	end
 end)
 maestro.hook("PlayerInitialSpawn", "maestro_messages", function(ply)
-	local joinstring = {"has joined ", Color(255, 108, 69), "for the first time", Color(255, 255, 255), "."}
+	local joinstring = {"has joined ", maestro.colors.red, "for the first time", maestro.colors.white, "."}
 	local id64 = ply:SteamID64()
 	local q = mysql:Select(maestro.config.tables.joins)
 	q:Where("steam64", id64)
 	q:Callback(function(res, status)
 			if type(res) == "table" and #res > 0 then
 				local entry = res[1]
-				joinstring = {"last joined ", Color(255, 108, 69), string.NiceTime(os.time() - entry.time) .. " ago", Color(255, 255, 255), "."}
+				joinstring = {"last joined ", maestro.colors.red, string.NiceTime(os.time() - entry.time) .. " ago", maestro.colors.white, "."}
 			end
 			CommitPlayerJoinTime(id64)
-			maestro.chat(nil, Color(255, 255, 255), "Player ", Color(78, 196, 255), ply:Nick(), Color(255, 255, 255), " (", Color(78, 196, 255), ply:SteamID(), Color(255, 255, 255), ") ", unpack(joinstring))
+			maestro.chat(nil, maestro.colors.white, "Player ", maestro.colors.blue, ply:Nick(), maestro.colors.white, " (", maestro.colors.blue, ply:SteamID(), maestro.colors.white, ") ", unpack(joinstring))
 		end)
 	q:Execute()
 end)
 maestro.hook("PlayerDisconnected", "maestro_messages", function(ply)
-	maestro.chat(nil, Color(255, 255, 255), "Player ", Color(78, 196, 255), ply:Nick(), Color(255, 255, 255), " (", Color(78, 196, 255), ply:SteamID(), Color(255, 255, 255), ") has left the game.")
+	maestro.chat(nil, maestro.colors.white, "Player ", maestro.colors.blue, ply:Nick(), maestro.colors.white, " (", maestro.colors.blue, ply:SteamID(), maestro.colors.white, ") has left the game.")
 	CommitPlayerJoinTime(ply:SteamID64())
 end)
 maestro.hook("DatabaseConnected", "maestro_jointime", function()
